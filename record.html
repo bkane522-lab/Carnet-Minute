@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F4EBDD" />
+  <title>Enregistrer — Carnet Minute</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="back-link" href="index.html" aria-label="Retour accueil">←</a>
+    <div>
+      <p class="eyebrow">nouvelle session</p>
+      <h1>Capturer l’audio</h1>
+    </div>
+    <a class="topbar-link" href="history.html">Historique</a>
+  </header>
+
+  <main class="shell compact-shell">
+    <section class="paper-card recorder-card">
+      <div class="mode-tabs" role="tablist" aria-label="Mode de capture">
+        <button class="mode-tab is-active" id="tabRecord" type="button">Enregistrer</button>
+        <button class="mode-tab" id="tabImport" type="button">Importer</button>
+      </div>
+
+      <section id="recordPanel" class="capture-panel">
+        <div class="timer-wrap" aria-live="polite">
+          <div class="pulse-dot" id="pulseDot"></div>
+          <div class="timer" id="timer">00:00</div>
+          <p class="muted" id="recordState">Prêt à enregistrer</p>
+        </div>
+
+        <div class="control-row">
+          <button class="btn btn-primary" id="startBtn" type="button">Démarrer</button>
+          <button class="btn btn-secondary" id="pauseBtn" type="button" disabled>Pause</button>
+          <button class="btn btn-danger" id="stopBtn" type="button" disabled>Arrêter</button>
+        </div>
+
+        <audio class="audio-preview" id="audioPreview" controls hidden></audio>
+
+        <button class="btn btn-primary full" id="processRecordingBtn" type="button" hidden>
+          Transcrire et analyser
+        </button>
+      </section>
+
+      <section id="importPanel" class="capture-panel" hidden>
+        <label class="drop-zone" for="audioFile">
+          <span class="drop-icon">⌁</span>
+          <strong>Choisir un fichier audio</strong>
+          <span>MP3, M4A, WAV, WEBM — 4 MB max pour cette V1</span>
+        </label>
+        <input id="audioFile" class="sr-only" type="file" accept="audio/*" />
+        <div id="fileInfo" class="file-info" hidden></div>
+        <button class="btn btn-primary full" id="processImportBtn" type="button" disabled>
+          Transcrire et analyser
+        </button>
+      </section>
+
+      <div class="progress-box" id="progressBox" hidden>
+        <div class="loader"></div>
+        <div>
+          <strong id="progressTitle">Traitement en cours</strong>
+          <p id="progressText">Préparation de l’audio…</p>
+        </div>
+      </div>
+
+      <div class="note warning-note">
+        Limite V1 : 4 MB par fichier audio. Pour les longues réunions, découpez l’audio avant import.
+      </div>
+
+      <div class="alert" id="alertBox" hidden></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="record.js"></script>
+</body>
+</html>

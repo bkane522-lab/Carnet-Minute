@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F4EBDD" />
+  <title>Historique — Carnet Minute</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="back-link" href="index.html" aria-label="Retour accueil">←</a>
+    <div>
+      <p class="eyebrow">sessions locales</p>
+      <h1>Historique</h1>
+    </div>
+    <a class="topbar-link" href="record.html">Nouveau</a>
+  </header>
+
+  <main class="shell compact-shell">
+    <section class="paper-card history-head">
+      <p class="muted">Les sessions sont stockées uniquement sur cet appareil.</p>
+      <button class="btn btn-danger soft" id="clearHistoryBtn" type="button">Vider l’historique</button>
+    </section>
+
+    <section id="historyList" class="history-list" aria-label="Historique des sessions"></section>
+
+    <section class="empty-state paper-card" id="emptyState" hidden>
+      <div class="empty-icon">□</div>
+      <h2>Aucune session</h2>
+      <p>Enregistrez ou importez un audio pour créer votre premier compte rendu.</p>
+      <a class="btn btn-primary" href="record.html">Créer une session</a>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="history.js"></script>
+</body>
+</html>

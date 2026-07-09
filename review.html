@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F4EBDD" />
+  <title>Résultat — Carnet Minute</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="back-link" href="index.html" aria-label="Retour accueil">←</a>
+    <div>
+      <p class="eyebrow">compte rendu</p>
+      <h1>Résultat éditable</h1>
+    </div>
+    <a class="topbar-link" href="history.html">Historique</a>
+  </header>
+
+  <main class="shell review-shell">
+    <section class="paper-card">
+      <label class="field-label" for="sessionTitle">Titre</label>
+      <input class="input" id="sessionTitle" type="text" placeholder="Réunion du jour" />
+
+      <label class="field-label" for="summaryInput">Résumé</label>
+      <textarea class="textarea summary-textarea" id="summaryInput" rows="4" placeholder="Résumé…"></textarea>
+
+      <div class="note warning-note compact">
+        Vérifiez les résultats avant de les envoyer. Les éléments sont modifiables manuellement.
+      </div>
+    </section>
+
+    <section class="tabs-card paper-card">
+      <div class="section-tabs" role="tablist" aria-label="Sections du compte rendu">
+        <button class="section-tab is-active" data-target="tasksPanel" type="button">✓ Tâches</button>
+        <button class="section-tab" data-target="decisionsPanel" type="button">🤝 Décisions</button>
+        <button class="section-tab" data-target="deadlinesPanel" type="button">📅 Échéances</button>
+      </div>
+
+      <section class="items-panel" id="tasksPanel">
+        <div class="panel-head">
+          <h2>Tâches</h2>
+          <button class="mini-btn" id="addTaskBtn" type="button">+ Ajouter</button>
+        </div>
+        <div id="tasksList" class="items-list"></div>
+      </section>
+
+      <section class="items-panel" id="decisionsPanel" hidden>
+        <div class="panel-head">
+          <h2>Décisions</h2>
+          <button class="mini-btn" id="addDecisionBtn" type="button">+ Ajouter</button>
+        </div>
+        <div id="decisionsList" class="items-list"></div>
+      </section>
+
+      <section class="items-panel" id="deadlinesPanel" hidden>
+        <div class="panel-head">
+          <h2>Échéances</h2>
+          <button class="mini-btn" id="addDeadlineBtn" type="button">+ Ajouter</button>
+        </div>
+        <div id="deadlinesList" class="items-list"></div>
+      </section>
+    </section>
+
+    <section class="paper-card actions-card">
+      <button class="btn btn-primary" id="saveBtn" type="button">Sauvegarder</button>
+      <button class="btn btn-secondary" id="exportBtn" type="button">Exporter</button>
+      <button class="btn btn-secondary" id="shareBtn" type="button">Partager</button>
+      <a class="btn btn-ghost" href="record.html">Nouvelle réunion</a>
+      <div class="alert" id="alertBox" hidden></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="review.js"></script>
+</body>
+</html>

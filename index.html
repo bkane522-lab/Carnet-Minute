@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F4EBDD" />
+  <title>Carnet Minute — réunions transformées en actions</title>
+  <meta name="description" content="Enregistrez ou importez une conversation, obtenez un résumé, des tâches, décisions et échéances." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="shell home-shell">
+    <section class="hero paper-card">
+      <div class="brand-lockup" aria-label="Carnet Minute">
+        <div class="brand-mark">CM</div>
+        <div>
+          <p class="eyebrow">papier + encre</p>
+          <h1>Carnet Minute</h1>
+        </div>
+      </div>
+
+      <p class="hero-copy">
+        Transformez une réunion, un appel ou une note vocale en résumé clair,
+        tâches, décisions et échéances vérifiables.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="record.html?mode=record">Enregistrer</a>
+        <a class="btn btn-secondary" href="record.html?mode=import">Importer un audio</a>
+        <a class="btn btn-ghost" href="history.html">Historique</a>
+      </div>
+
+      <div class="note warning-note">
+        <strong>Important.</strong> L’IA peut se tromper. Vérifiez toujours les résultats avant de les envoyer ou de les utiliser.
+      </div>
+    </section>
+
+    <section class="feature-grid" aria-label="Fonctionnalités">
+      <article class="feature-card">
+        <span class="feature-icon">✓</span>
+        <h2>Tâches</h2>
+        <p>Actions concrètes, assignés si mentionnés, priorité simple.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">🤝</span>
+        <h2>Décisions</h2>
+        <p>Ce qui a été validé, avec le contexte utile.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">📅</span>
+        <h2>Échéances</h2>
+        <p>Dates explicites uniquement, sans invention.</p>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
