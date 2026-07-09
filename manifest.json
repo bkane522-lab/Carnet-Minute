@@ -1,12 +1,13 @@
 {
   "name": "Carnet Minute",
   "short_name": "Carnet",
-  "description": "Compte rendu local de réunions : résumé, tâches, décisions et échéances.",
+  "description": "Réunions claires. Décisions nettes.",
   "start_url": "index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#F4EBDD",
-  "theme_color": "#172034",
+  "background_color": "#F5EAD8",
+  "theme_color": "#0B1426",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "icons/icon-192.png",

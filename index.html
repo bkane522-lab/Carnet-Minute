@@ -3,58 +3,117 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#F4EBDD" />
-  <title>Carnet Minute — réunions transformées en actions</title>
-  <meta name="description" content="Enregistrez ou importez une conversation, obtenez un résumé, des tâches, décisions et échéances." />
+  <meta name="theme-color" content="#0B1426" />
+  <title>Carnet Minute — Papier + Encre</title>
+  <meta name="description" content="Enregistrez ou importez une conversation, puis obtenez un résumé clair, des tâches, décisions et échéances vérifiables." />
+  <meta property="og:title" content="Carnet Minute" />
+  <meta property="og:description" content="Réunions claires. Décisions nettes." />
+  <meta property="og:image" content="og-image.png" />
   <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="favicon.png" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="shell home-shell">
-    <section class="hero paper-card">
-      <div class="brand-lockup" aria-label="Carnet Minute">
-        <div class="brand-mark">CM</div>
-        <div>
+    <section class="hero executive-card">
+      <div class="ink-wash" aria-hidden="true"></div>
+      <div class="paper-corner" aria-hidden="true"></div>
+
+      <div class="brand-row hero-brand" aria-label="Carnet Minute">
+        <div class="cm-logo cm-logo-xl"><span>CM</span></div>
+        <div class="brand-title-block">
           <p class="eyebrow">papier + encre</p>
           <h1>Carnet Minute</h1>
         </div>
       </div>
 
-      <p class="hero-copy">
-        Transformez une réunion, un appel ou une note vocale en résumé clair,
-        tâches, décisions et échéances vérifiables.
-      </p>
+      <p class="hero-copy">Transformez vos échanges en <span>décisions claires</span>.</p>
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="record.html?mode=record">Enregistrer</a>
-        <a class="btn btn-secondary" href="record.html?mode=import">Importer un audio</a>
-        <a class="btn btn-ghost" href="history.html">Historique</a>
+      <div class="hero-meta" aria-label="Promesse produit">
+        <span>Privé sur appareil</span>
+        <span>Export markdown</span>
+        <span>Résultats éditables</span>
       </div>
 
-      <div class="note warning-note">
-        <strong>Important.</strong> L’IA peut se tromper. Vérifiez toujours les résultats avant de les envoyer ou de les utiliser.
+      <div class="action-grid action-grid-boss" aria-label="Actions principales">
+        <a class="action-card action-card-primary" href="record.html?mode=record">
+          <span class="action-icon" aria-hidden="true">🎙️</span>
+          <strong>Enregistrer</strong>
+          <small>Réunion ou appel</small>
+        </a>
+
+        <a class="action-card" href="record.html?mode=import">
+          <span class="action-icon" aria-hidden="true">↥</span>
+          <strong>Importer</strong>
+          <small>Audio ou note vocale</small>
+        </a>
+
+        <a class="action-card" href="history.html">
+          <span class="action-icon" aria-hidden="true">↺</span>
+          <strong>Historique</strong>
+          <small>Sessions locales</small>
+        </a>
+      </div>
+
+      <div class="note warning-note premium-warning">
+        <span class="note-badge" aria-hidden="true">◆</span>
+        <span><strong>Important.</strong> L’IA peut se tromper. Vérifiez toujours les résultats avant de les envoyer ou de les utiliser.</span>
       </div>
     </section>
 
-    <section class="feature-grid" aria-label="Fonctionnalités">
-      <article class="feature-card">
-        <span class="feature-icon">✓</span>
+    <section class="dashboard-grid" aria-label="Vue d’ensemble">
+      <article class="metric-card">
+        <span class="metric-icon" aria-hidden="true">✓</span>
+        <p class="feature-kicker">Actions</p>
         <h2>Tâches</h2>
-        <p>Actions concrètes, assignés si mentionnés, priorité simple.</p>
+        <strong id="homeTaskCount">0</strong>
+        <p>Actions concrètes, assignées si mentionnées, priorité simple.</p>
       </article>
-      <article class="feature-card">
-        <span class="feature-icon">🤝</span>
+
+      <article class="metric-card">
+        <span class="metric-icon" aria-hidden="true">⚖</span>
+        <p class="feature-kicker">Validation</p>
         <h2>Décisions</h2>
+        <strong id="homeDecisionCount">0</strong>
         <p>Ce qui a été validé, avec le contexte utile.</p>
       </article>
-      <article class="feature-card">
-        <span class="feature-icon">📅</span>
+
+      <article class="metric-card">
+        <span class="metric-icon" aria-hidden="true">17</span>
+        <p class="feature-kicker">Suivi</p>
         <h2>Échéances</h2>
+        <strong id="homeDeadlineCount">0</strong>
         <p>Dates explicites uniquement, sans invention.</p>
       </article>
     </section>
+
+    <section class="paper-card last-card" id="latestSessionCard" hidden>
+      <div class="last-visual" aria-hidden="true"><span>CM</span></div>
+      <div class="last-content">
+        <p class="eyebrow">dernière session</p>
+        <h2 id="latestSessionTitle">Session récente</h2>
+        <p class="muted" id="latestSessionSummary">Résumé indisponible.</p>
+        <div class="history-stats" id="latestSessionStats"></div>
+      </div>
+      <a class="mini-btn mini-btn-dark" id="latestSessionLink" href="history.html">Voir</a>
+    </section>
+
+    <section class="paper-card last-card privacy-card">
+      <div>
+        <p class="eyebrow">mode v1</p>
+        <h2>Simple, local, maîtrisé.</h2>
+        <p class="muted">Aucun compte. Historique sauvegardé sur cet appareil. Export manuel avant partage.</p>
+      </div>
+      <a class="mini-btn" href="record.html">Nouvelle session</a>
+    </section>
   </main>
+
+  <nav class="bottom-nav" aria-label="Navigation principale">
+    <a class="is-active" href="index.html"><span>⌂</span>Accueil</a>
+    <a href="record.html"><span>◉</span>Capturer</a>
+    <a href="history.html"><span>□</span>Historique</a>
+  </nav>
 
   <script src="app.js"></script>
 </body>

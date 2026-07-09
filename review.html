@@ -3,24 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#F4EBDD" />
+  <meta name="theme-color" content="#0B1426" />
   <title>Résultat — Carnet Minute</title>
   <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="favicon.png" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
+  <header class="topbar premium-topbar">
     <a class="back-link" href="index.html" aria-label="Retour accueil">←</a>
-    <div>
-      <p class="eyebrow">compte rendu</p>
-      <h1>Résultat éditable</h1>
+    <div class="topbar-brand">
+      <div class="cm-logo cm-logo-sm"><span>CM</span></div>
+      <div>
+        <p class="eyebrow">compte rendu</p>
+        <h1>Résultat éditable</h1>
+      </div>
     </div>
     <a class="topbar-link" href="history.html">Historique</a>
   </header>
 
   <main class="shell review-shell">
-    <section class="paper-card">
+    <section class="paper-card review-hero-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">vérification humaine</p>
+          <h2>Résumé et corrections</h2>
+          <p class="muted">Chaque élément peut être modifié, supprimé ou complété avant export.</p>
+        </div>
+      </div>
+
       <label class="field-label" for="sessionTitle">Titre</label>
       <input class="input" id="sessionTitle" type="text" placeholder="Réunion du jour" />
 
@@ -28,15 +40,15 @@
       <textarea class="textarea summary-textarea" id="summaryInput" rows="4" placeholder="Résumé…"></textarea>
 
       <div class="note warning-note compact">
-        Vérifiez les résultats avant de les envoyer. Les éléments sont modifiables manuellement.
+        Vérifiez les résultats avant de les envoyer. L’IA peut manquer du contexte ou mal interpréter une phrase.
       </div>
     </section>
 
     <section class="tabs-card paper-card">
       <div class="section-tabs" role="tablist" aria-label="Sections du compte rendu">
         <button class="section-tab is-active" data-target="tasksPanel" type="button">✓ Tâches</button>
-        <button class="section-tab" data-target="decisionsPanel" type="button">🤝 Décisions</button>
-        <button class="section-tab" data-target="deadlinesPanel" type="button">📅 Échéances</button>
+        <button class="section-tab" data-target="decisionsPanel" type="button">⚖ Décisions</button>
+        <button class="section-tab" data-target="deadlinesPanel" type="button">17 Échéances</button>
       </div>
 
       <section class="items-panel" id="tasksPanel">
@@ -64,7 +76,7 @@
       </section>
     </section>
 
-    <section class="paper-card actions-card">
+    <section class="paper-card actions-card sticky-actions">
       <button class="btn btn-primary" id="saveBtn" type="button">Sauvegarder</button>
       <button class="btn btn-secondary" id="exportBtn" type="button">Exporter</button>
       <button class="btn btn-secondary" id="shareBtn" type="button">Partager</button>
@@ -72,6 +84,12 @@
       <div class="alert" id="alertBox" hidden></div>
     </section>
   </main>
+
+  <nav class="bottom-nav" aria-label="Navigation principale">
+    <a href="index.html"><span>⌂</span>Accueil</a>
+    <a href="record.html"><span>◉</span>Capturer</a>
+    <a href="history.html"><span>□</span>Historique</a>
+  </nav>
 
   <script src="app.js"></script>
   <script src="review.js"></script>

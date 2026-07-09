@@ -194,6 +194,57 @@
   }
 
 
+
+  function setText(id, value) {
+    const node = document.getElementById(id);
+    if (node) node.textContent = value;
+  }
+
+  function initHomeDashboard() {
+    const taskCountNode = document.getElementById('homeTaskCount');
+    if (!taskCountNode) return;
+
+    const sessions = getSessions();
+    const totals = sessions.reduce((acc, session) => {
+      const result = normalizeResult(session.result);
+      acc.tasks += result.tasks.length;
+      acc.decisions += result.decisions.length;
+      acc.deadlines += result.deadlines.length;
+      return acc;
+    }, { tasks: 0, decisions: 0, deadlines: 0 });
+
+    setText('homeTaskCount', totals.tasks);
+    setText('homeDecisionCount', totals.decisions);
+    setText('homeDeadlineCount', totals.deadlines);
+
+    const latestCard = document.getElementById('latestSessionCard');
+    const latest = sessions[0];
+    if (!latestCard || !latest) return;
+
+    const result = normalizeResult(latest.result);
+    latestCard.hidden = false;
+    setText('latestSessionTitle', latest.title || 'Session récente');
+    setText('latestSessionSummary', summarizeForCard(result.summary));
+
+    const link = document.getElementById('latestSessionLink');
+    if (link) link.href = `review.html?id=${encodeURIComponent(latest.id)}`;
+
+    const stats = document.getElementById('latestSessionStats');
+    if (stats) {
+      stats.innerHTML = '';
+      [
+        `✓ ${result.tasks.length} tâches`,
+        `⚖ ${result.decisions.length} décisions`,
+        `17 ${result.deadlines.length} échéances`
+      ].forEach((text) => {
+        const pill = document.createElement('span');
+        pill.className = 'meta-pill';
+        pill.textContent = text;
+        stats.appendChild(pill);
+      });
+    }
+  }
+
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
@@ -220,6 +271,9 @@
     normalizeResult,
     makeDefaultTitle,
     summarizeForCard,
-    buildMarkdown
+    buildMarkdown,
+    initHomeDashboard
   };
+
+  initHomeDashboard();
 })();
