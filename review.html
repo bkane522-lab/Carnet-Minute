@@ -39,6 +39,15 @@
       <label class="field-label" for="summaryInput">Résumé</label>
       <textarea class="textarea summary-textarea" id="summaryInput" rows="4" placeholder="Résumé…"></textarea>
 
+      <details class="transcript-details" id="transcriptBox">
+        <summary>Transcription entendue</summary>
+        <p class="muted mini-text">Utile pour vérifier si le micro a bien capté votre voix. Exemple : si vous dites seulement “ok ok”, il est normal qu’aucune tâche ne soit détectée.</p>
+        <textarea class="textarea transcript-textarea" id="transcriptInput" rows="5" placeholder="Transcription brute…"></textarea>
+        <div class="compact-actions">
+          <button class="mini-btn" id="reanalyzeBtn" type="button">Ré-analyser ce texte</button>
+        </div>
+      </details>
+
       <div class="note warning-note compact">
         Vérifiez les résultats avant de les envoyer. L’IA peut manquer du contexte ou mal interpréter une phrase.
       </div>
@@ -48,7 +57,7 @@
       <div class="section-tabs" role="tablist" aria-label="Sections du compte rendu">
         <button class="section-tab is-active" data-target="tasksPanel" type="button">✓ Tâches</button>
         <button class="section-tab" data-target="decisionsPanel" type="button">⚖ Décisions</button>
-        <button class="section-tab" data-target="deadlinesPanel" type="button">17 Échéances</button>
+        <button class="section-tab" data-target="deadlinesPanel" type="button">↗ Échéances</button>
       </div>
 
       <section class="items-panel" id="tasksPanel">

@@ -4,6 +4,9 @@
   const elements = {
     sessionTitle: document.getElementById('sessionTitle'),
     summaryInput: document.getElementById('summaryInput'),
+    transcriptBox: document.getElementById('transcriptBox'),
+    transcriptInput: document.getElementById('transcriptInput'),
+    reanalyzeBtn: document.getElementById('reanalyzeBtn'),
     tabs: Array.from(document.querySelectorAll('.section-tab')),
     panels: Array.from(document.querySelectorAll('.items-panel')),
     tasksList: document.getElementById('tasksList'),
@@ -49,6 +52,14 @@
     currentResult = CMApp.normalizeResult(currentSession.result);
     elements.sessionTitle.value = currentSession.title || CMApp.makeDefaultTitle();
     elements.summaryInput.value = currentResult.summary || '';
+    if (elements.transcriptInput) {
+      elements.transcriptInput.value = currentSession.transcript || '';
+    }
+
+    const hasNoExtractedItems = !currentResult.tasks.length && !currentResult.decisions.length && !currentResult.deadlines.length;
+    if (elements.transcriptBox && hasNoExtractedItems && currentSession.transcript) {
+      elements.transcriptBox.open = true;
+    }
   }
 
   function switchTab(targetId) {
@@ -350,6 +361,7 @@
       title: elements.sessionTitle.value.trim() || CMApp.makeDefaultTitle(),
       createdAt: currentSession?.createdAt || new Date().toISOString(),
       updatedAt: new Date().toISOString(),
+      transcript: elements.transcriptInput ? elements.transcriptInput.value.trim() : (currentSession?.transcript || ''),
       result: CMApp.normalizeResult(currentResult)
     };
   }
@@ -454,6 +466,43 @@
     renderDeadlines();
   }
 
+
+  async function reanalyzeTranscript() {
+    const transcript = elements.transcriptInput ? elements.transcriptInput.value.trim() : '';
+
+    if (!transcript) {
+      CMApp.showAlert(elements.alertBox, 'Aucune transcription à analyser.', 'error');
+      return;
+    }
+
+    CMApp.hideAlert(elements.alertBox);
+    elements.reanalyzeBtn.disabled = true;
+    elements.reanalyzeBtn.textContent = 'Analyse…';
+
+    try {
+      const response = await fetch('/api/extract', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ transcript })
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.error || 'Erreur pendant la ré-analyse.');
+      }
+
+      currentResult = CMApp.normalizeResult(payload);
+      elements.summaryInput.value = currentResult.summary || '';
+      renderAll();
+      CMApp.showAlert(elements.alertBox, 'Transcription ré-analysée. Vérifiez le résultat avant export.', 'success');
+    } catch (error) {
+      CMApp.showAlert(elements.alertBox, error.message || 'Erreur pendant la ré-analyse.', 'error');
+    } finally {
+      elements.reanalyzeBtn.disabled = false;
+      elements.reanalyzeBtn.textContent = 'Ré-analyser ce texte';
+    }
+  }
+
   elements.tabs.forEach((tab) => {
     tab.addEventListener('click', () => switchTab(tab.dataset.target));
   });
@@ -464,6 +513,7 @@
   elements.saveBtn.addEventListener('click', saveCurrentSession);
   elements.exportBtn.addEventListener('click', handleExport);
   elements.shareBtn.addEventListener('click', handleShare);
+  if (elements.reanalyzeBtn) elements.reanalyzeBtn.addEventListener('click', reanalyzeTranscript);
 
   loadSession();
   renderAll();

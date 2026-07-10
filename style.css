@@ -547,3 +547,84 @@ h2 { position: relative; z-index: 1; margin: 0 0 8px; color: var(--ink); font-si
   .bottom-nav a { font-size: .68rem; }
 }
 
+
+/* V5 — test audio + scroll polish */
+.transcript-details {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(11,20,38,.10);
+  border-radius: 18px;
+  background: rgba(255,253,248,.58);
+}
+.transcript-details summary {
+  cursor: pointer;
+  color: var(--ink);
+  font-weight: 900;
+  list-style: none;
+}
+.transcript-details summary::-webkit-details-marker { display: none; }
+.transcript-details summary::after {
+  content: "+";
+  float: right;
+  color: var(--gold);
+  font-weight: 900;
+}
+.transcript-details[open] summary::after { content: "−"; }
+.mini-text { margin: 10px 0 10px; font-size: .86rem; line-height: 1.45; }
+.transcript-textarea {
+  min-height: 118px;
+  font-size: .92rem;
+}
+.compact-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+@media (max-width: 760px) {
+  body { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
+  .review-shell, .compact-shell { gap: 10px; }
+  .review-hero-card .section-head { margin-bottom: 10px; }
+  .review-hero-card .muted { font-size: .9rem; }
+  .summary-textarea { min-height: 104px; }
+  .transcript-details { margin-top: 12px; padding: 11px 12px; border-radius: 16px; }
+  .transcript-textarea { min-height: 104px; }
+  .section-tabs {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 12px;
+    border-radius: 20px;
+  }
+  .section-tab {
+    min-height: 38px;
+    padding: 0 5px;
+    font-size: .74rem;
+    white-space: nowrap;
+  }
+  .tabs-card { padding: 14px; }
+  .panel-head { margin: 2px 0 12px; }
+  .panel-head h2 { font-size: 1.28rem; }
+  .item-card { padding: 13px; border-radius: 18px; }
+  .actions-card {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .actions-card .btn { min-height: 46px; padding: 0 12px; font-size: .82rem; }
+  .bottom-nav {
+    width: min(410px, calc(100% - 30px));
+    padding: 5px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+  }
+  .bottom-nav a { min-height: 42px; font-size: .69rem; }
+}
+
+@media (max-width: 380px) {
+  .section-tab { font-size: .68rem; padding: 0 3px; }
+  .actions-card .btn { font-size: .78rem; }
+}

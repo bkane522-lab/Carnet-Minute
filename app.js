@@ -235,7 +235,7 @@
       [
         `✓ ${result.tasks.length} tâches`,
         `⚖ ${result.decisions.length} décisions`,
-        `17 ${result.deadlines.length} échéances`
+        `↗ ${result.deadlines.length} échéances`
       ].forEach((text) => {
         const pill = document.createElement('span');
         pill.className = 'meta-pill';
