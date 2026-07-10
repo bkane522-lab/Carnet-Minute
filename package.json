@@ -1,6 +1,6 @@
 {
   "name": "carnet-minute",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Carnet Minute - transcription et compte rendu local de réunions avec Groq",
   "scripts": {

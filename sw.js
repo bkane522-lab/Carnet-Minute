@@ -1,4 +1,4 @@
-const CACHE_NAME = 'carnet-minute-v3-boss-1';
+const CACHE_NAME = 'carnet-minute-v4-polish-1';
 const CORE_ASSETS = [
   './',
   './index.html',

@@ -78,6 +78,7 @@
 
   function resetRecorderUi() {
     elements.startBtn.disabled = false;
+    elements.startBtn.textContent = 'Démarrer';
     elements.pauseBtn.disabled = true;
     elements.stopBtn.disabled = true;
     elements.pauseBtn.textContent = 'Pause';
@@ -90,6 +91,11 @@
     elements.progressTitle.textContent = title || 'Traitement en cours';
     elements.progressText.textContent = text || 'Préparation…';
     elements.startBtn.disabled = isBusy;
+    if (isBusy) {
+      elements.startBtn.textContent = 'Analyse…';
+    } else if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+      elements.startBtn.textContent = 'Démarrer';
+    }
     elements.pauseBtn.disabled = isBusy || !mediaRecorder || mediaRecorder.state === 'inactive';
     elements.stopBtn.disabled = isBusy || !mediaRecorder || mediaRecorder.state === 'inactive';
     elements.processRecordingBtn.disabled = isBusy;
@@ -153,6 +159,7 @@
 
       mediaRecorder.start(1000);
       elements.startBtn.disabled = true;
+      elements.startBtn.textContent = 'En cours…';
       elements.pauseBtn.disabled = false;
       elements.stopBtn.disabled = false;
       elements.recordState.textContent = 'Enregistrement en cours…';
@@ -294,6 +301,7 @@
       window.location.href = 'review.html?source=temp';
     } catch (error) {
       setBusy(false);
+      if (!mediaRecorder || mediaRecorder.state === 'inactive') resetRecorderUi();
       CMApp.showAlert(elements.alertBox, error.message || 'Une erreur inconnue est survenue.', 'error');
     }
   }
