@@ -114,6 +114,7 @@ Règles importantes :
 - Une tâche doit être une action concrète à faire.
 - Une décision doit être quelque chose qui a été validé ou tranché.
 - Une échéance doit être une date, une période ou un délai mentionné.
+- Si la transcription contient uniquement des mots de test, des hésitations, "ok", "test", ou aucune information exploitable, retourne un résumé qui dit clairement : "Transcription reçue, mais aucune action claire n’a été détectée." et laisse tasks, decisions et deadlines vides.
 
 Format obligatoire :
 
